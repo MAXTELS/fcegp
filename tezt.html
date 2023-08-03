@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>GPA Calculator</title>
+    <script>
+        function calculateGPA() {
+            var credits = document.getElementsByName("credits");
+            var grades = document.getElementsByName("grades");
+            var totalGradePoints = 0;
+            for (var i = 0; i < credits.length; i++) {
+                totalGradePoints += credits[i].value * grades[i].value;
+            }
+            var gpa = totalGradePoints / sum(credits);
+            document.getElementById("gpa").innerHTML = "Your GPA is: " + gpa;
+        }
+
+        function sum(credits) {
+            var sum = 0;
+            for (var i = 0; i < credits.length; i++) {
+                sum += parseInt(credits[i].value);
+            }
+            return sum;
+        }
+    </script>
+</head>
+<body>
+    <h1>GPA Calculator</h1>
+    <form>
+        <p>How many courses are you taking? <input type="number" name="numCourses" id="numCourses"/></p>
+        <div id="courses">
+        </div>
+        <input type="button" value="Calculate GPA" onclick="calculateGPA()"/>
+    </form>
+    <p id="gpa"></p>
+    <script>
+        var numCourses = document.getElementById("numCourses");
+        numCourses.addEventListener("change", function() {
+            var coursesDiv = document.getElementById("courses");
+            coursesDiv.innerHTML = "";
+            for (var i = 0; i < numCourses.value; i++) {
+                coursesDiv.innerHTML += "<p>Enter the number of credits for course " + (i+1) + ": <input type='number' name='credits'/></p>";...               coursesDiv.innerHTML += "<p>Enter your grade for course " + (i+1) + ": <input type='number' name='grades'/></p>";
+            }
+        });
+    </script>
+</body>
+</html>
